@@ -6,6 +6,6 @@ const produtoController = new ProdutoController();
 
 
 router.get('/produtos', produtoController.listar)
-router.get('/produtos', produtoController.cadastrar);
+router.post('/produtos', produtoController.cadastrar);
 
 module.exports = router;

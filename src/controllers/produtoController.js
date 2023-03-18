@@ -12,13 +12,13 @@ class ProdutoController {
         }
     }
 
-    cadastrar(req,res) {
+    async cadastrar(req,res) {
         try {
             const produto = req.body;
-            const produtoCadastrado = produtoService.cadastrarProduto(produto);
+            const produtoCadastrado = await produtoService.cadastrarProduto(produto);
             res.status(201).json(produtoCadastrado);
         }catch(err){
-            console.log(err);
+            console.log(err.message);
             res.status(500).send(err.message);
         }
     }

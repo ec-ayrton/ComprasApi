@@ -2,7 +2,10 @@ const ProdutoRepository = require('../repositories/produtoRepository')
 const produtoRepository = new ProdutoRepository();
 
 class ProdutoService{
-    cadastrarProduto(produto){
+    async cadastrarProduto(produto){
+        const produtoFromDb = await produtoRepository.buscarPorNome(produto.nome);
+        if(produtoFromDb)
+            throw new Error("Nome do Produto já cadastrado.")
         return produtoRepository.salvar(produto);
     }
 

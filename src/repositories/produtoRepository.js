@@ -8,6 +8,9 @@ class ProdutoRepository{
     async buscarTodosProdutos(){
         return  knex('produto').select('*');
     }
+    async buscarPorNome(nome){
+        return knex('produto').select('*').where('nome','=',nome).first();
+    }
 }
 
 module.exports = ProdutoRepository;
