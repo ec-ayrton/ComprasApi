@@ -1,0 +1,36 @@
+openapi: 3.0.0
+info:
+  title: Compras Api
+  description: Api para gerenciar compras, produtos e clientes.
+  version: 1.0.0
+paths:
+  /clientes:
+    get:
+      summary: Retorna uma lista de clientes
+      tags: [Clientes]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cliente'
+components:
+  schemas:
+    Cliente:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        cpf:
+          type: string
+        email:
+          type: string
+      required:
+        - nome
+        - cpf
+        - email
