@@ -11,6 +11,9 @@ class ClienteRepository{
     async buscarPorCpf(cliente){
         return knex('cliente').select('*').where('nome','=',cliente.cpf).first();
     }
+    async buscarPorId(id){
+        return knex('cliente').select('*').where('id','=',id).first();
+    }
 }
 
 module.exports = ClienteRepository;

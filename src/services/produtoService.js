@@ -13,6 +13,10 @@ class ProdutoService{
         return  produtoRepository.buscarTodosProdutos();
     }
 
+    async buscarProdutoPorId(id) {
+        return produtoRepository.buscarPorId(id)
+    }
+
 }
 
 module.exports  = ProdutoService;

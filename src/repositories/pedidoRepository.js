@@ -5,7 +5,7 @@ class PedidoRepository{
         const pedidoToBd = {
             dataPedido: pedido.dataPedido,
             total: pedido.total,
-            id_cliente: pedido.id_cliente
+            id_cliente: pedido.idCliente
         };
 
         await knex.transaction(async (trx) => {
@@ -16,7 +16,7 @@ class PedidoRepository{
                 preco: item.preco,
                 id_pedido: idPedido,
                 item_total: item.total,
-                id_produto: item.id_produto
+                id_produto: item.idProduto
             }));
 
             await Promise.all(itemsPedido.map((itemToBd) => trx('itemPedido').insert(itemToBd)));

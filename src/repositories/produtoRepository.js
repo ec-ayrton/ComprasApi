@@ -11,6 +11,9 @@ class ProdutoRepository{
     async buscarPorNome(nome){
         return knex('produto').select('*').where('nome','=',nome).first();
     }
+    async buscarPorId(id){
+        return knex('produto').select('*').where('id','=',id).first();
+    }
 }
 
 module.exports = ProdutoRepository;

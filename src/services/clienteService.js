@@ -9,6 +9,10 @@ class ClienteService{
         return clienteRepository.salvar(cliente);
     }
 
+    async buscarClientePorId(id){
+        return clienteRepository.buscarPorId(id);
+    }
+
     async buscarTodosClientes(){
         return  clienteRepository.buscarTodosClientes();
     }
