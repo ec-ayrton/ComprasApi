@@ -1,15 +1,41 @@
 version: '3.1'
 services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+        NODE_ENV: development
+        DB_HOST: db
+        DB_PORT: 3306
+        DB_NAME: comprasApi
+        DB_USER: root
+        DB_PASSWORD: 123
+    depends_on:
+      - db
+      - migration
   db:
     image: mysql:8.0.0
     container_name: db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: asd
+      MYSQL_ROOT_PASSWORD: 123
       MYSQL_DATABASE: comprasApi
     ports:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
+  migration:
+    build: .
+    environment:
+        NODE_ENV: development
+        DB_HOST: db
+        DB_PORT: 3306
+        DB_NAME: comprasApi
+        DB_USER: root
+        DB_PASSWORD: 123
+    depends_on:
+      - db
+    command: ["npm","run","migrate"]
 volumes:
   db_data:
