@@ -1,13 +1,13 @@
 openapi: 3.0.0
 info:
   title: Compras Api
-  description: Api para gerenciar compras, produtos e clientes.
+  description: Uma básica simples que visa permitir o cadastro de clientes, produtos e pedidos. Possibilitando a listagem também para averiguação dos dados.
   version: 1.0.0
 paths:
   /clientes:
     get:
       summary: Retorna uma lista de clientes
-      tags: [Clientes]
+      tags: [Cliente]
       responses:
         '200':
           description: OK
@@ -17,6 +17,86 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Cliente'
+    post:
+      summary: Cadastra um cliente
+      tags: [Cliente]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cliente'
+  /produtos:
+    get:
+      summary: Retorna uma lista de produtos
+      tags: [ Produto ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Produto'
+    post:
+      summary: Cadastra um produto
+      tags: [ Produto ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Produto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Produto'
+  /pedidos:
+    get:
+      summary: Retorna uma lista de pedidos
+      tags: [ Pedido ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pedido'
+    post:
+      summary: Cadastra um pedido
+      tags: [ Pedido ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pedido'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pedido'
 components:
   schemas:
     Cliente:
