@@ -1,19 +1,20 @@
 const PedidoRepository = require('../repositories/pedidoRepository')
 const ValidadorPedido = require('../validators/validadorPedido')
 
-
-
-const pedidoRepository = new PedidoRepository();
-const validadorPedido = new ValidadorPedido();
 class PedidoService {
+
+    constructor() {
+        this.pedidoRepository = new PedidoRepository();
+        this.validadorPedido = new ValidadorPedido();
+    }
     async cadastrarPedido(pedido) {
-        await validadorPedido.validaCamposPedido(pedido)
+        await this.validadorPedido.validaCamposPedido(pedido)
         this.calculaTotais(pedido);
-        return pedidoRepository.salvar(pedido);
+        return this.pedidoRepository.salvar(pedido);
     }
 
     async buscarTodosPedido() {
-        return pedidoRepository.buscarTodosPedidos();
+        return this.pedidoRepository.buscarTodosPedidos();
     }
 
     calculaTotais(pedido){
