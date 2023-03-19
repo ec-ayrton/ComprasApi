@@ -28,9 +28,60 @@ components:
           type: string
         cpf:
           type: string
-        email:
-          type: string
       required:
         - nome
         - cpf
-        - email
+    Produto:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        descricao:
+          type: string
+        preco:
+          type: number
+      required:
+        - nome
+        - descricao
+        - preco
+    Pedido:
+      type: object
+      properties:
+        id:
+          type: integer
+        dataPedido:
+          type: string
+          format: date
+        total:
+          type: number
+        idCliente:
+          type: integer
+        itens:
+          $ref: '#/components/schemas/ItemPedido'
+
+      required:
+        - dataPedido
+        - idCliente
+        - itens
+    ItemPedido:
+      type: object
+      properties:
+        id:
+          type: integer
+        idPedido:
+          type: integer
+        idProduto:
+          type: number
+        quantidade:
+          type: number
+        preco:
+          type: number
+        itemTotal:
+          type: number
+      required:
+        - idPedido
+        - idProduto
+        - quantidade
+
