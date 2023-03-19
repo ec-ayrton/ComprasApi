@@ -1,4 +1,5 @@
 const PedidoRepository = require('../repositories/pedidoRepository')
+const ItemPedidoService = require('./itemPedidoService')
 const ValidadorPedido = require('../validators/validadorPedido')
 
 class PedidoService {
@@ -6,6 +7,7 @@ class PedidoService {
     constructor() {
         this.pedidoRepository = new PedidoRepository();
         this.validadorPedido = new ValidadorPedido();
+        this.itemPedidoService = new ItemPedidoService();
     }
     async cadastrarPedido(pedido) {
         await this.validadorPedido.validaCamposPedido(pedido)
@@ -14,7 +16,12 @@ class PedidoService {
     }
 
     async buscarTodosPedido() {
-        return this.pedidoRepository.buscarTodosPedidos();
+        let pedidos = await this.pedidoRepository.buscarTodosPedidos();
+        const pedidosComItens = await Promise.all(pedidos.map(async (pedido) => ({
+            ...pedido,
+            item: await this.itemPedidoService.buscarItensDoPedido(pedido.id),
+        })));
+        return pedidosComItens;
     }
 
     calculaTotais(pedido){
